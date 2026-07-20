@@ -9,27 +9,7 @@ interface NormalPageGenerator extends BaseGeneratorReturn {
 type PageGenerator = SimplePageGenerator | NormalPageGenerator;
 
 function pageGenerator(locals: SiteLocals): PageGenerator[] {
-  return locals.pages.map((page: Document<PageSchema> & PageSchema) => {
-    const { path, layout } = page;
-
-    if (!layout || layout === 'false' || layout === 'off') {
-      return {
-        path,
-        data: page.content
-      };
-    }
-
-    const layouts = ['page', 'post', 'index'];
-    if (layout !== 'page') layouts.unshift(layout);
-
-    page.__page = true;
-
-    return {
-      path,
-      layout: layouts,
-      data: page
-    };
-  });
+    throw new Error("STUB");
 }
 
 export = pageGenerator;

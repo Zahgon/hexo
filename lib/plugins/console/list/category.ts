@@ -7,22 +7,7 @@ import type Model from 'warehouse/dist/model';
 import type Document from 'warehouse/dist/document';
 
 function listCategory(this: Hexo): void {
-  const categories: Model<CategorySchema> = this.model('Category');
-
-  const data = categories.sort({name: 1}).map((cate: Document<CategorySchema> & CategorySchema) => [cate.name, String(cate.length)]);
-
-  // Table header
-  const header = ['Name', 'Posts'].map(str => underline(str));
-
-  data.unshift(header);
-
-  const t = table(data, {
-    align: ['l', 'r'],
-    stringLength
-  });
-
-  console.log(t);
-  if (data.length === 1) console.log('No categories.');
+    throw new Error("STUB");
 }
 
 export = listCategory;

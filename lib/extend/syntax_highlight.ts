@@ -46,7 +46,7 @@ class SyntaxHighlight {
   }
 
   query(name: string): StoreFunction {
-    return name && this.store[name];
+      throw new Error("STUB");
   }
 
   exec(name: string, options: HighlightExecArgs): string {

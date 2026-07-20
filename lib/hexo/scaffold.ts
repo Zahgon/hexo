@@ -33,31 +33,20 @@ class Scaffold {
     const { scaffoldDir } = this;
 
     return exists(scaffoldDir).then(exist => {
-      if (!exist) return [];
-
-      return listDir(scaffoldDir, {
-        ignorePattern: /^_|\/_/
-      });
-    }).map(item => ({
-      name: item.substring(0, item.length - extname(item).length),
-      path: join(scaffoldDir, item)
-    }));
+        throw new Error("STUB");
+    }).map(item => { throw new Error("STUB"); });
   }
 
   _getScaffold(name: string): Promise<{
     name: string;
     path: string;
   }> {
-    return this._listDir().then(list => list.find(item => item.name === name));
+    return this._listDir().then(list => { throw new Error("STUB"); });
   }
 
   get(name: string, callback?: NodeJSLikeCallback<any>): Promise<string> {
     return this._getScaffold(name).then(item => {
-      if (item) {
-        return readFile(item.path);
-      }
-
-      return this.defaults[name];
+        throw new Error("STUB");
     }).asCallback(callback);
   }
 
@@ -65,18 +54,13 @@ class Scaffold {
     const { scaffoldDir } = this;
 
     return this._getScaffold(name).then(item => {
-      let path = item ? item.path : join(scaffoldDir, name);
-      if (!extname(path)) path += '.md';
-
-      return writeFile(path, content);
+        throw new Error("STUB");
     }).asCallback(callback);
   }
 
   remove(name: string, callback?: NodeJSLikeCallback<void>): Promise<void> {
     return this._getScaffold(name).then(item => {
-      if (!item) return;
-
-      return unlink(item.path);
+        throw new Error("STUB");
     }).asCallback(callback);
   }
 }

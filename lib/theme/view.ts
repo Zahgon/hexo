@@ -36,11 +36,7 @@ class View {
   public _render: Render;
 
   constructor(path: string, data: string) {
-    this.path = path;
-    this.source = join(this._theme.base, 'layout', path);
-    this.data = typeof data === 'string' ? yfm(data) : data;
-
-    this._precompile();
+      throw new Error("STUB");
   }
 
   render(callback: NodeJSLikeCallback<any>): Promise<any>;
@@ -55,39 +51,12 @@ class View {
     const locals = this._buildLocals(options as Options);
 
     return this._compiled(this._bindHelpers(locals)).then(result => {
-      if (result == null || !layout) return result;
-
-      const layoutView = this._resolveLayout(layout);
-      if (!layoutView) return result;
-
-      const layoutLocals = {
-        ...locals,
-        body: result,
-        layout: false
-      };
-
-      return layoutView.render(layoutLocals, callback);
+        throw new Error("STUB");
     }).asCallback(callback);
   }
 
   renderSync(options: Options = {}) {
-    const { data } = this;
-    const { layout = options.layout } = data;
-    const locals = this._buildLocals(options);
-    const result = this._compiledSync(this._bindHelpers(locals));
-
-    if (result == null || !layout) return result;
-
-    const layoutView = this._resolveLayout(layout);
-    if (!layoutView) return result;
-
-    const layoutLocals = {
-      ...locals,
-      body: result,
-      layout: false
-    };
-
-    return layoutView.renderSync(layoutLocals);
+      throw new Error("STUB");
   }
 
   _buildLocals(locals: Options) {
@@ -122,42 +91,7 @@ class View {
   }
 
   _precompile(): void {
-    const render = this._render;
-    const ctx = render.context;
-    const ext = extname(this.path);
-    const renderer = render.getRenderer(ext);
-    const data = {
-      path: this.source,
-      text: this.data._content
-    };
-
-    function buildFilterArguments(result: any): [string, any, { context: any, args: any[] }] {
-      const output = render.getOutput(ext) || ext;
-      return [
-        `after_render:${output}`,
-        result,
-        {
-          context: ctx,
-          args: [data]
-        }
-      ];
-    }
-
-    if (renderer && typeof renderer.compile === 'function') {
-      const compiled = renderer.compile(data);
-
-      this._compiledSync = locals => {
-        const result = compiled(locals);
-        return ctx.execFilterSync(...buildFilterArguments(result));
-      };
-
-      this._compiled = locals => Promise.resolve(compiled(locals))
-        .then(result => ctx.execFilter(...buildFilterArguments(result)));
-    } else {
-      this._compiledSync = locals => render.renderSync(data, locals);
-
-      this._compiled = locals => render.render(data, locals);
-    }
+      throw new Error("STUB");
   }
 }
 

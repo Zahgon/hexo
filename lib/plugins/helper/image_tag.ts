@@ -14,15 +14,7 @@ interface Attrs {
 }
 
 function imageTagHelper(this: LocalsType, path: string, options: Options = {}) {
-  const attrs = Object.assign({
-    src: url_for.call(this, path) as string
-  }, options);
-
-  if (attrs.class && Array.isArray(attrs.class)) {
-    attrs.class = attrs.class.join(' ');
-  }
-
-  return htmlTag('img', attrs as Attrs);
+    throw new Error("STUB");
 }
 
 export = imageTagHelper;

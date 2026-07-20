@@ -18,14 +18,7 @@ const store = {
 const alias = abbrev(Object.keys(store));
 
 function listConsole(this: Hexo, args: ListArgs): Promise<void> {
-  const type = args._.shift();
-
-  // Display help message if user didn't input any arguments
-  if (!type || !alias[type]) {
-    return this.call('help', {_: ['list']});
-  }
-
-  return this.load().then(() => Reflect.apply(store[alias[type]], this, [args]));
+    throw new Error("STUB");
 }
 
 export = listConsole;

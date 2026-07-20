@@ -15,36 +15,7 @@ class Theme extends Box {
   public View: typeof View;
 
   constructor(ctx: Hexo, options?: any) {
-    super(ctx, ctx.theme_dir, options);
-
-    this.config = {};
-
-    this.views = {};
-
-    this.processors = [
-      config,
-      i18n,
-      source,
-      view
-    ];
-
-    let languages: string | string[] = ctx.config.language;
-
-    if (!Array.isArray(languages)) languages = [languages];
-
-    languages.push('default');
-
-    this.i18n = new I18n({
-      languages: [...new Set(languages.filter(Boolean))]
-    });
-
-    class _View extends View {}
-
-    this.View = _View;
-
-    _View.prototype._theme = this;
-    _View.prototype._render = ctx.render;
-    _View.prototype._helper = ctx.extend.helper;
+      throw new Error("STUB");
   }
 
   getView(path: string): View {
@@ -65,22 +36,11 @@ class Theme extends Box {
   }
 
   setView(path: string, data: string): void {
-    const ext = extname(path);
-    const name = path.substring(0, path.length - ext.length);
-    this.views[name] = this.views[name] || {};
-    const views = this.views[name];
-
-    views[ext] = new this.View(path, data);
+      throw new Error("STUB");
   }
 
   removeView(path: string): void {
-    const ext = extname(path);
-    const name = path.substring(0, path.length - ext.length);
-    const views = this.views[name];
-
-    if (!views) return;
-
-    views[ext] = undefined;
+      throw new Error("STUB");
   }
 }
 

@@ -22,42 +22,15 @@ class BinaryRelationIndex<K extends PropertyKey, V extends PropertyKey> {
   }
 
   load() {
-    this.keyIndex.clear();
-    this.valueIndex.clear();
-    const raw = this.ctx.model(this.schemaName).data;
-    for (const _id in raw) {
-      this.saveHook(raw[_id]);
-    }
+      throw new Error("STUB");
   }
 
   saveHook(data: BinaryRelationType<K, V> & { _id: PropertyKey }) {
-    if (!data) return;
-    const _id = data._id;
-    const key = data[this.key];
-    const value = data[this.value];
-    if (!this.keyIndex.has(key)) {
-      this.keyIndex.set(key, new Set());
-    }
-    this.keyIndex.get(key).add(_id);
-
-    if (!this.valueIndex.has(value)) {
-      this.valueIndex.set(value, new Set());
-    }
-    this.valueIndex.get(value).add(_id);
+      throw new Error("STUB");
   }
 
   removeHook(data: BinaryRelationType<K, V> & { _id: PropertyKey }) {
-    const _id = data._id;
-    const key = data[this.key];
-    const value = data[this.value];
-    this.keyIndex.get(key)?.delete(_id);
-    if (this.keyIndex.get(key)?.size === 0) {
-      this.keyIndex.delete(key);
-    }
-    this.valueIndex.get(value)?.delete(_id);
-    if (this.valueIndex.get(value)?.size === 0) {
-      this.valueIndex.delete(value);
-    }
+      throw new Error("STUB");
   }
 
   findById(_id: PropertyKey) {
@@ -74,27 +47,27 @@ class BinaryRelationIndex<K extends PropertyKey, V extends PropertyKey> {
       const ids = this.keyIndex.get(key);
       if (!ids) return [];
       return Array.from(ids)
-        .map(_id => this.findById(_id))
-        .filter(record => record?.[this.value] === value);
+        .map(_id => { throw new Error("STUB"); })
+        .filter(record => { throw new Error("STUB"); });
     }
 
     if (key) {
       const ids = this.keyIndex.get(key);
       if (!ids) return [];
-      return Array.from(ids).map(_id => this.findById(_id));
+      return Array.from(ids).map(_id => { throw new Error("STUB"); });
     }
 
     if (value) {
       const ids = this.valueIndex.get(value);
       if (!ids) return [];
-      return Array.from(ids).map(_id => this.findById(_id));
+      return Array.from(ids).map(_id => { throw new Error("STUB"); });
     }
 
     return [];
   }
 
   findOne(query: Partial<BinaryRelationType<K, V>>) {
-    return this.find(query)[0];
+      throw new Error("STUB");
   }
 }
 

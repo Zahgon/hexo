@@ -4,30 +4,11 @@ import { dirname } from 'path';
 import type { StoreFunctionData } from '../../extend/renderer';
 
 function toArray(value) {
-  if (Array.isArray(value)) {
-    // Return if given value is an Array
-    return value;
-  } else if (typeof value.toArray === 'function') {
-    return value.toArray();
-  } else if (value instanceof Map) {
-    const arr = [];
-    value.forEach(v => arr.push(v));
-    return arr;
-  } else if (value instanceof Set || typeof value === 'string') {
-    return [...value];
-  } else if (typeof value === 'object' && value instanceof Object && Boolean(value)) {
-    return Object.values(value);
-  }
-
-  return [];
+    throw new Error("STUB");
 }
 
 function safeJsonStringify(json: any, spacer = undefined): string {
-  if (typeof json !== 'undefined' && json !== null) {
-    return JSON.stringify(json, null, spacer);
-  }
-
-  return '""';
+    throw new Error("STUB");
 }
 
 const nunjucksCfg = {
@@ -57,12 +38,11 @@ function njkCompile(data: StoreFunctionData): nunjucks.Template {
 }
 
 function njkRenderer(data: StoreFunctionData, locals?: any): string {
-  return njkCompile(data).render(locals);
+    throw new Error("STUB");
 }
 
 njkRenderer.compile = (data: StoreFunctionData): (locals: any) => string => {
-  // Need a closure to keep the compiled template.
-  return locals => njkCompile(data).render(locals);
+    throw new Error("STUB");
 };
 
 export = njkRenderer;

@@ -58,21 +58,11 @@ class Filter {
     fn.priority = priority;
     store.push(fn);
 
-    store.sort((a, b) => a.priority - b.priority);
+    store.sort((a, b) => { throw new Error("STUB"); });
   }
 
   unregister(type: string, fn: StoreFunction): void {
-    if (!type) throw new TypeError('type is required');
-    if (typeof fn !== 'function') throw new TypeError('fn must be a function');
-
-    type = typeAlias[type] || type;
-
-    const list = this.list(type);
-    if (!list || !list.length) return;
-
-    const index = list.indexOf(fn);
-
-    if (index !== -1) list.splice(index, 1);
+      throw new Error("STUB");
   }
 
   exec(type: string, data: any, options: FilterOptions = {}): Promise<any> {
@@ -84,28 +74,11 @@ class Filter {
 
     args.unshift(data);
 
-    return Promise.each(filters, filter => Reflect.apply(Promise.method(filter), ctx, args).then(result => {
-      args[0] = result == null ? args[0] : result;
-      return args[0];
-    })).then(() => args[0]);
+    return Promise.each(filters, filter => { throw new Error("STUB"); }).then(() => { throw new Error("STUB"); });
   }
 
   execSync(type: string, data: any, options: FilterOptions = {}) {
-    const filters = this.list(type);
-    const filtersLen = filters.length;
-    if (filtersLen === 0) return data;
-
-    const ctx = options.context;
-    const args = options.args || [];
-
-    args.unshift(data);
-
-    for (let i = 0, len = filtersLen; i < len; i++) {
-      const result = Reflect.apply(filters[i], ctx, args);
-      args[0] = result == null ? args[0] : result;
-    }
-
-    return args[0];
+      throw new Error("STUB");
   }
 }
 

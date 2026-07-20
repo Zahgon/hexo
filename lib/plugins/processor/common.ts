@@ -29,26 +29,11 @@ export {isHiddenFile};
 export {isExcludedFile};
 
 export function toDate(date?: string | number | Date | moment.Moment): Date | undefined | moment.Moment {
-  if (!date || moment.isMoment(date)) return date as any;
-
-  if (!(date instanceof Date)) {
-    date = new Date(date);
-  }
-
-  if (isNaN(date.getTime())) return;
-
-  return date;
+    throw new Error("STUB");
 }
 
 export function adjustDateForTimezone(date: Date | moment.Moment, timezone: string) {
-  if (moment.isMoment(date)) date = date.toDate();
-
-  const offset = date.getTimezoneOffset();
-  const ms = date.getTime();
-  const target = moment.tz.zone(timezone).utcOffset(ms);
-  const diff = (offset - target) * DURATION_MINUTE;
-
-  return new Date(ms - diff);
+    throw new Error("STUB");
 }
 
 export {isMatch};

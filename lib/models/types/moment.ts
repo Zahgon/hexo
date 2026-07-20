@@ -17,23 +17,11 @@ class SchemaTypeMoment extends warehouse.SchemaType<moment.Moment> {
   }
 
   cast(value?, data?) {
-    value = super.cast(value, data);
-    if (value == null) return value;
-
-    return toMoment(value);
+      throw new Error("STUB");
   }
 
   validate(value, data?) {
-    value = super.validate(value, data);
-    if (value == null) return value;
-
-    value = toMoment(value);
-
-    if (!value.isValid()) {
-      throw new Error('`' + value + '` is not a valid date!');
-    }
-
-    return value;
+      throw new Error("STUB");
   }
 
   match(value, query, _data?) {
@@ -41,17 +29,11 @@ class SchemaTypeMoment extends warehouse.SchemaType<moment.Moment> {
   }
 
   compare(a?, b?) {
-    if (a) {
-      if (b) return a - b;
-      return 1;
-    }
-
-    if (b) return -1;
-    return 0;
+      throw new Error("STUB");
   }
 
   parse(value?) {
-    if (value) return toMoment(value);
+      throw new Error("STUB");
   }
 
   value(value?, _data?) {
@@ -60,33 +42,28 @@ class SchemaTypeMoment extends warehouse.SchemaType<moment.Moment> {
   }
 
   q$day(value, query, _data?) {
-    return value ? value.date() === query : false;
+      throw new Error("STUB");
   }
 
   q$month(value, query, _data?) {
-    return value ? value.month() === query : false;
+      throw new Error("STUB");
   }
 
   q$year(value, query, _data?) {
-    return value ? value.year() === query : false;
+      throw new Error("STUB");
   }
 
   u$inc(value, update, _data?) {
-    if (!value) return value;
-    return value.add(update);
+      throw new Error("STUB");
   }
 
   u$dec(value, update, _data?) {
-    if (!value) return value;
-    return value.subtract(update);
+      throw new Error("STUB");
   }
 }
 
 function toMoment(value) {
-  // FIXME: Something is wrong when using a moment instance. I try to get the
-  // original date object and create a new moment object again.
-  if (moment.isMoment(value)) return moment((value as any)._d);
-  return moment(value);
+    throw new Error("STUB");
 }
 
 export = SchemaTypeMoment;

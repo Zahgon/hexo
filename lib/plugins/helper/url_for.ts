@@ -6,5 +6,5 @@ interface Options {
 }
 
 export = function(this: LocalsType, path: string, options: Options = {}) {
-  return url_for.call(this, path, options);
+    throw new Error("STUB");
 }

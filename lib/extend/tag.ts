@@ -25,106 +25,57 @@ class NunjucksTag {
   }
 
   parse(parser, nodes, lexer) {
-    const node = this._parseArgs(parser, nodes, lexer);
-
-    return new nodes.CallExtension(this, 'run', node, []);
+      throw new Error("STUB");
   }
 
   _parseArgs(parser, nodes, lexer) {
-    const tag = parser.nextToken();
-    const node = new nodes.NodeList(tag.lineno, tag.colno);
-    const argarray = new nodes.Array(tag.lineno, tag.colno);
-
-    let token;
-    let argitem = '';
-
-    while ((token = parser.nextToken(true))) {
-      if (token.type === lexer.TOKEN_WHITESPACE || token.type === lexer.TOKEN_BLOCK_END) {
-        if (argitem !== '') {
-          const argnode = new nodes.Literal(tag.lineno, tag.colno, argitem.trim());
-          argarray.addChild(argnode);
-          argitem = '';
-        }
-
-        if (token.type === lexer.TOKEN_BLOCK_END) {
-          break;
-        }
-      } else {
-        argitem += token.value;
-      }
-    }
-
-    node.addChild(argarray);
-
-    return node;
+      throw new Error("STUB");
   }
 
   run(context, args, _body, _callback) {
-    return this._run(context, args, '');
+      throw new Error("STUB");
   }
 
   _run(context, args, body): any {
-    return Reflect.apply(this.fn, context.ctx, [args, body]);
+      throw new Error("STUB");
   }
 }
 
 const trimBody = (body: () => any) => {
-  return stripIndent(body()).replace(/^\n?|\n?$/g, '');
+    throw new Error("STUB");
 };
 
 class NunjucksBlock extends NunjucksTag {
   parse(parser, nodes, lexer) {
-    const node = this._parseArgs(parser, nodes, lexer);
-    const body = this._parseBody(parser, nodes, lexer);
-
-    return new nodes.CallExtension(this, 'run', node, [body]);
+      throw new Error("STUB");
   }
 
   _parseBody(parser, _nodes, _lexer) {
-    const body = parser.parseUntilBlocks(`end${this.tags[0]}`);
-
-    parser.advanceAfterBlockEnd();
-    return body;
+      throw new Error("STUB");
   }
 
   run(context, args, body, _callback) {
-    return this._run(context, args, trimBody(body));
+      throw new Error("STUB");
   }
 }
 
 class NunjucksAsyncTag extends NunjucksTag {
   parse(parser, nodes, lexer) {
-    const node = this._parseArgs(parser, nodes, lexer);
-
-    return new nodes.CallExtensionAsync(this, 'run', node, []);
+      throw new Error("STUB");
   }
 
   run(context, args, callback) {
-    return this._run(context, args, '').then(result => {
-      callback(null, result);
-    }, callback);
+      throw new Error("STUB");
   }
 }
 
 class NunjucksAsyncBlock extends NunjucksBlock {
   parse(parser, nodes, lexer) {
-    const node = this._parseArgs(parser, nodes, lexer);
-    const body = this._parseBody(parser, nodes, lexer);
-
-    return new nodes.CallExtensionAsync(this, 'run', node, [body]);
+      throw new Error("STUB");
   }
 
   run(context, args, body, callback) {
-    // enable async tag nesting
-    body((err, result) => {
-      // wrapper for trimBody expecting
-      // body to be a function
-      body = () => result || '';
-
-      this._run(context, args, trimBody(body)).then(result => {
-        callback(err, result);
-      });
-    });
+      throw new Error("STUB");
   }
 }
 
@@ -149,12 +100,7 @@ const getContext = (lines: string[], errLine: number, location: string, type: st
     // get LINES_OF_CONTEXT lines surrounding `errLine`
     ...getContextLineNums(1, lines.length, errLine, LINES_OF_CONTEXT)
       .map(lnNum => {
-        const line = '  ' + lnNum + ' | ' + lines[lnNum - 1];
-        if (lnNum === errLine) {
-          return cyan(bold(line));
-        }
-
-        return cyan(line);
+          throw new Error("STUB");
       })
   );
   message.push(cyan(
@@ -249,11 +195,7 @@ class Tag {
   }
 
   unregister(name: string): void {
-    if (!name) throw new TypeError('name is required');
-
-    const { env } = this;
-
-    if (env.hasExtension(name)) env.removeExtension(name);
+      throw new Error("STUB");
   }
 
   render(str: string): Promise<any>;
@@ -269,18 +211,9 @@ class Tag {
     const { source = '' } = options as { source?: string };
 
     return Promise.fromCallback(cb => {
-      this.env.renderString(
-        str.replace(rCodeTag, s => {
-          // https://hexo.io/docs/tag-plugins#Raw
-          // https://mozilla.github.io/nunjucks/templating.html#raw
-          // Only escape code block when there is no raw tag included
-          return s.match(rSwigRawFullBlock) ? s : escapeSwigTag(s);
-        }),
-        options,
-        cb
-      );
+        throw new Error("STUB");
     }).catch(err => {
-      return Promise.reject(formatNunjucksError(err, str, source));
+        throw new Error("STUB");
     })
       .asCallback(callback);
   }

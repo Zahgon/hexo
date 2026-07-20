@@ -16,7 +16,7 @@ try {
 }
 
 function yamlHelper(data: StoreFunctionData): any {
-  return yaml.load(escape(data.text), { schema });
+    throw new Error("STUB");
 }
 
 export = yamlHelper;

@@ -23,58 +23,11 @@ class RouteStream extends Readable {
 
   // Assume we only accept Buffer, plain object, or string
   _toBuffer(data: Buffer | object | string): Buffer | null {
-    if (data instanceof Buffer) {
-      return data;
-    }
-    if (typeof data === 'object') {
-      data = JSON.stringify(data);
-    }
-    if (typeof data === 'string') {
-      return Buffer.from(data); // Assume string is UTF-8 encoded string
-    }
-    return null;
+      throw new Error("STUB");
   }
 
   _read(): boolean {
-    const data = this._data;
-
-    if (typeof data !== 'function') {
-      const bufferData = this._toBuffer(data);
-      if (bufferData) {
-        this.push(bufferData);
-      }
-      this.push(null);
-      return;
-    }
-
-    // Don't read it twice!
-    if (this._ended) return false;
-    this._ended = true;
-
-    data().then(data => {
-      if (data instanceof Stream && (data as Stream.Readable).readable) {
-        data.on('data', d => {
-          this.push(d);
-        });
-
-        data.on('end', () => {
-          this.push(null);
-        });
-
-        data.on('error', err => {
-          this.emit('error', err);
-        });
-      } else {
-        const bufferData = this._toBuffer(data);
-        if (bufferData) {
-          this.push(bufferData);
-        }
-        this.push(null);
-      }
-    }).catch(err => {
-      this.emit('error', err);
-      this.push(null);
-    });
+      throw new Error("STUB");
   }
 }
 
@@ -108,7 +61,7 @@ class Router extends EventEmitter {
 
   list(): string[] {
     const { routes } = this;
-    return Object.keys(routes).filter(key => routes[key]);
+    return Object.keys(routes).filter(key => { throw new Error("STUB"); });
   }
 
   format(path?: string): string {
@@ -125,10 +78,7 @@ class Router extends EventEmitter {
   }
 
   isModified(path: string): boolean {
-    if (typeof path !== 'string') throw new TypeError('path must be a string!');
-
-    const data = this.routes[this.format(path)];
-    return data ? data.modified : false;
+      throw new Error("STUB");
   }
 
   set(path: string, data: any): this {

@@ -85,7 +85,7 @@ class Renderer {
   }
 
   isRenderableSync(path: string): boolean {
-    return Boolean(this.get(path, true));
+      throw new Error("STUB");
   }
 
   getOutput(path: string): string {

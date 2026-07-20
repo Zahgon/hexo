@@ -13,10 +13,7 @@ class Locals {
     if (typeof name !== 'string') throw new TypeError('name must be a string!');
 
     return this.cache.apply(name, () => {
-      const getter = this.getters[name];
-      if (!getter) return;
-
-      return getter();
+        throw new Error("STUB");
     });
   }
 
@@ -24,7 +21,7 @@ class Locals {
     if (typeof name !== 'string') throw new TypeError('name must be a string!');
     if (value == null) throw new TypeError('value is required!');
 
-    const getter = typeof value === 'function' ? value : () => value;
+    const getter = typeof value === 'function' ? value : () => { throw new Error("STUB"); };
 
     this.getters[name] = getter;
     this.cache.del(name);
@@ -42,23 +39,11 @@ class Locals {
   }
 
   invalidate(): this {
-    this.cache.flush();
-
-    return this;
+      throw new Error("STUB");
   }
 
   toObject(): Record<string, any> {
-    const result = {};
-    const keys = Object.keys(this.getters);
-
-    for (let i = 0, len = keys.length; i < len; i++) {
-      const key = keys[i];
-      const item = this.get(key);
-
-      if (item != null) result[key] = item;
-    }
-
-    return result;
+      throw new Error("STUB");
   }
 }
 

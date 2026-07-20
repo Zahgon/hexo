@@ -9,16 +9,5 @@ import type Hexo from '../../hexo';
  *   {% post_path slug | title %}
  */
 export = (ctx: Hexo) => {
-  return function postPathTag(args: any[]) {
-    const slug = args.shift();
-    if (!slug) return;
-
-    const factory = postFindOneFactory(ctx);
-    const post = factory({ slug }) || factory({ title: slug });
-    if (!post) return;
-
-    const link = url_for.call(ctx, post.path);
-
-    return link;
-  };
+    throw new Error("STUB");
 };

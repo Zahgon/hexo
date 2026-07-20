@@ -41,19 +41,19 @@ class File {
   }
 
   read(options?: ReadFileOptions): Promise<string> {
-    return readFile(this.source, options) as Promise<string>;
+      throw new Error("STUB");
   }
 
   readSync(options?: ReadFileOptions): string {
-    return readFileSync(this.source, options) as string;
+      throw new Error("STUB");
   }
 
   stat(): Promise<fs.Stats> {
-    return stat(this.source);
+      throw new Error("STUB");
   }
 
   statSync(): fs.Stats {
-    return statSync(this.source);
+      throw new Error("STUB");
   }
 }
 

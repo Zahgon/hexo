@@ -19,40 +19,11 @@ interface AssetGenerator extends BaseGeneratorReturn {
 }
 
 const process = (name: string, ctx: Hexo) => {
-  return Promise.filter(ctx.model(name).toArray(), (asset: Document<AssetSchema>) => exists(asset.source).tap(exist => {
-    if (!exist) return asset.remove();
-  })).map((asset: Document<AssetSchema>) => {
-    const { source } = asset;
-    let { path } = asset;
-    const data: AssetData = {
-      modified: asset.modified
-    };
-
-    if (asset.renderable && ctx.render.isRenderable(path)) {
-      // Replace extension name if the asset is renderable
-      const filename = path.substring(0, path.length - extname(path).length);
-
-      path = `${filename}.${ctx.render.getOutput(path)}`;
-
-      data.data = () => ctx.render.render({
-        path: source,
-        toString: true
-      }).catch((err: Error) => {
-        ctx.log.error({err}, 'Asset render failed: %s', magenta(path));
-      });
-    } else {
-      data.data = () => createReadStream(source);
-    }
-
-    return { path, data };
-  });
+    throw new Error("STUB");
 };
 
 function assetGenerator(this: Hexo): Promise<AssetGenerator[]> {
-  return Promise.all([
-    process('Asset', this),
-    process('PostAsset', this)
-  ]).then(data => [].concat(...data));
+    throw new Error("STUB");
 }
 
 export = assetGenerator;

@@ -41,7 +41,7 @@ class Render {
   }
 
   isRenderableSync(path: string): boolean {
-    return this.renderer.isRenderableSync(path);
+      throw new Error("STUB");
   }
 
   getOutput(path: string): string {
@@ -53,7 +53,7 @@ class Render {
   }
 
   getRendererSync(ext: string): StoreSyncFunction | StoreFunction {
-    return this.getRenderer(ext, true);
+      throw new Error("STUB");
   }
 
   render(data: StoreFunctionData, callback?: NodeJSLikeCallback<any>): Promise<any>;
@@ -80,61 +80,16 @@ class Render {
     }
 
     return promise.then(text => {
-      data.text = text;
-      ext = data.engine || getExtname(data.path);
-      if (!ext || !this.isRenderable(ext)) return text;
-
-      const renderer = this.getRenderer(ext);
-      return Reflect.apply(renderer, ctx, [data, options]);
+        throw new Error("STUB");
     }).then(result => {
-      result = toString(result, data);
-      if (data.onRenderEnd) {
-        return data.onRenderEnd(result);
-      }
-
-      return result;
+        throw new Error("STUB");
     }).then(result => {
-      const output = this.getOutput(ext) || ext;
-      return ctx.execFilter(`after_render:${output}`, result, {
-        context: ctx,
-        args: [data]
-      });
+        throw new Error("STUB");
     }).asCallback(callback);
   }
 
   renderSync(data: StoreFunctionData, options = {}): any {
-    if (!data) throw new TypeError('No input file or string!');
-
-    const ctx = this.context;
-
-    if (data.text == null) {
-      if (!data.path) throw new TypeError('No input file or string!');
-      data.text = readFileSync(data.path);
-    }
-
-    if (data.text == null) throw new TypeError('No input file or string!');
-
-    const ext = data.engine || getExtname(data.path);
-    let result;
-
-    if (ext && this.isRenderableSync(ext)) {
-      const renderer = this.getRendererSync(ext);
-      result = Reflect.apply(renderer, ctx, [data, options]);
-    } else {
-      result = data.text;
-    }
-
-    const output = this.getOutput(ext) || ext;
-    result = toString(result, data);
-
-    if (data.onRenderEnd) {
-      result = data.onRenderEnd(result);
-    }
-
-    return ctx.execFilterSync(`after_render:${output}`, result, {
-      context: ctx,
-      args: [data]
-    });
+      throw new Error("STUB");
   }
 }
 
